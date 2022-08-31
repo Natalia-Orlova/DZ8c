@@ -6,35 +6,39 @@
 // 27(0,0,1) 90(0,1,1)
 // 26(1,0,1) 55(1,1,1)
 
-int[,] CreateMatrixRndInt(int row, int col, int min, int max)
+int[,,] Create3DArrayRndInt(int z, int x, int y, int min, int max)
 {
-    int[,] matrix = new int[row, col];
-    Random rnd = new Random();
-
-    for (int i = 0; i < matrix.GetLength(0); i++)
+    int[,,] array = new int[z, x, y];
+    Random rnd = new Random((int)DateTime.Now.Millisecond);
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-        for (int j = 0; j < matrix.GetLength(1); j++)
+        for (int j = 0; j < array.GetLength(1); j++)
         {
-            matrix[i, j] = rnd.Next(min, max + 1);
+            for (int k = 0; k < array.GetLength(2); k++)
+            {
+                array[i,j,k] = rnd.Next(min, max + 1);
+            }
         }
     }
-    return matrix;
+
+    return array;
 }
 
-void PrintMatrix(int[,] matrix)
+void Print3DArray(int[,,] array)
 {
-    for (int i = 0; i < matrix.GetLength(0); i++)
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-        Console.Write("[");
-        for (int j = 0; j < matrix.GetLength(1); j++)
+        for (int j = 0; j < array.GetLength(1); j++)
         {
-            if (j < matrix.GetLength(1) - 1) Console.Write($"{matrix[i, j],3},");
-            else Console.Write($"{matrix[i, j],3} ");
+            for (int k = 0; k < array.GetLength(2); k++)
+            {
+                Console.Write($"{array[i, j, k]}({i},{j},{k}) ");
+            }
         }
-        Console.WriteLine("]");
+        Console.WriteLine();
     }
 }
 
-int[,] matrix1 = CreateMatrixRndInt(3, 3, 0, 9);
-PrintMatrix(matrix1);
+int[,,] array3d = Create3DArrayRndInt(2, 2, 2, 10, 99);
+Print3DArray(array3d);
 Console.WriteLine();
