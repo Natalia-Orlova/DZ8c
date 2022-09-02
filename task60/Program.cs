@@ -10,21 +10,42 @@
 
 int[,,] Create3DArrayRndInt(int z, int x, int y, int min, int max)
 {
-    int num = 99;
+
+    int num = 10;
     int[,,] array = new int[z, x, y];
+    
     for (int i = 0; i < array.GetLength(0); i++)
     {
         for (int j = 0; j < array.GetLength(1); j++)
         {
             for (int k = 0; k < array.GetLength(2); k++)
             {
-                if (num % 10!=0 && num > 9)
-                array[i, j, k] = (num % 10) * 10 + (num/10);
-                num--;
+                array[i, j, k] = num;
+                num++;
             }
         }
     }
     return array;
+
+}
+
+void MixArray (int[,,] array)
+{
+    Random rnd = new Random();
+    for (int i = array.GetLength(0)-1; i >=1 ; i--)
+    {
+        for (int j = array.GetLength(1)-1; j >=1 ; j--)
+        {
+            for (int k = 0; k < array.GetLength(2); k++)
+            {
+                int l = rnd.Next(i+1);
+                int m = rnd.Next(j+1);
+                int temp = array[i,j,k];
+                array[i,j,k] = array[l,m,k];
+                array[l,m,k] = temp;
+            }
+        }
+    }
 }
 
 
@@ -43,6 +64,7 @@ void Print3DArray(int[,,] array)
     }
 }
 
-int[,,] array3d = Create3DArrayRndInt(2, 2, 2, 10, 99);
+int[,,] array3d = Create3DArrayRndInt(2,2,2, 10, 99);
+MixArray(array3d);
 Print3DArray(array3d);
 
