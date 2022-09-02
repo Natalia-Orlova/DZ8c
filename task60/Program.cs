@@ -6,23 +6,27 @@
 // 27(0,0,1) 90(0,1,1)
 // 26(1,0,1) 55(1,1,1)
 
+
+
 int[,,] Create3DArrayRndInt(int z, int x, int y, int min, int max)
 {
+    int num = 99;
     int[,,] array = new int[z, x, y];
-    Random rnd = new Random((int)DateTime.Now.Millisecond);
     for (int i = 0; i < array.GetLength(0); i++)
     {
         for (int j = 0; j < array.GetLength(1); j++)
         {
             for (int k = 0; k < array.GetLength(2); k++)
             {
-                array[i,j,k] = rnd.Next(min, max + 1);
+                if (num % 10!=0 && num > 9)
+                array[i, j, k] = (num % 10) * 10 + (num/10);
+                num--;
             }
         }
     }
-
     return array;
 }
+
 
 void Print3DArray(int[,,] array)
 {
@@ -41,4 +45,4 @@ void Print3DArray(int[,,] array)
 
 int[,,] array3d = Create3DArrayRndInt(2, 2, 2, 10, 99);
 Print3DArray(array3d);
-Console.WriteLine();
+
