@@ -8,7 +8,7 @@
 
 
 
-int[,,] Create3DArrayRndInt(int z, int x, int y, int min, int max)
+int[,,] Create3DArrayInt(int z, int x, int y)
 {
     int num = 10;
     int[,,] array = new int[z, x, y];
@@ -63,7 +63,7 @@ void Print3DArray(int[,,] array)
     }
 }
 
-int[,,] array3d = Create3DArrayRndInt(3, 3, 3, 10, 99);
+int[,,] array3d = Create3DArrayInt(3, 3, 3);
 MixArray(array3d);
 int size = array3d.GetLength(0)*array3d.GetLength(1)*array3d.GetLength(2);
 if (size > 90) Console.WriteLine("В матрице такого размера двузначные числа повторяются");
